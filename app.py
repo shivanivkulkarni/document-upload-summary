@@ -35,8 +35,9 @@ def get_vector_store(text_chunks):
 
 def get_conversational_chain():
     prompt_template = """
-    Answer the question as detailed as possible from the provided context, make sure to provide all details.If answer
-    is not provided in the context just say,"answer is not available in the context",don't provide the wrong answer \n
+    Answer the question as detailed as possible from the provided context, make sure to provide all details.
+    If possible give answer in bullet points.
+    If answer is not provided in the context just say,"answer is not available in the context",don't provide the wrong answer \n
     Context:\n {context}?\n
     Question:\n {question}\n
 
@@ -55,7 +56,7 @@ def user_input(user_question):
 
     chain = get_conversational_chain()
 
-    response = chain(
+    response = chain.invoke(
         {"input_documents":docs, "question":user_question}
         , return_only_outputs=True)
 
